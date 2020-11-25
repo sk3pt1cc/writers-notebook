@@ -1,6 +1,11 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { SceneForm } from './components'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Router, Link } from "@reach/router"
+
+import { SignIn } from './components'
+import { Story } from './Pages'
+import { auth } from './firebase.setup'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -23,11 +28,20 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [user] = useAuthState(auth)
+
   return (
     <>
       <GlobalStyle />
       <div className="App">
-        <SceneForm />
+        {!user ? (
+          <SignIn />
+        ) : (
+          <Router>
+            <Story path="/story" />
+            <Story path="/story/:id" />
+          </Router>
+        )}
       </div>
     </>
   );
