@@ -1,12 +1,14 @@
 import React from 'react'
 import { auth } from '../../firebase.setup';
+import CreateStory from './Create';
+import ViewStory from './View';
 
 const Story = ({ id }) => (
     <>
         {id ? (
-            <p>Viewing story with id {id}</p>
+            <ViewStory id={id} />
         ) : (
-            <p>Create new story</p>
+            <CreateStory />
         )}
     </>
 );

@@ -6,6 +6,7 @@ import { Router, Link } from "@reach/router"
 import { SignIn } from './components'
 import { Story } from './Pages'
 import { auth } from './firebase.setup'
+import Stories from './Pages/Stories';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -40,6 +41,7 @@ function App() {
           <Router>
             <Story path="/story" />
             <Story path="/story/:id" />
+            <Stories path="/stories" />
           </Router>
         )}
       </div>
