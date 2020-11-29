@@ -1,14 +1,21 @@
 import React from 'react'
-import { useAuth, useScenes } from '../../../custom-hooks'
+import { useAuth, useScenes, useStories } from '../../../custom-hooks'
 import {
   FlexContainer,
-  Column
+  Column,
+  RightAlign
 } from '../../../components/layout'
+import {
+  Input,
+  Button,
+  MultiselectDropdown
+} from '../../../components/reusable'
 import { SceneFormWrapper } from './styles'
 
 const CreateScene = () => {
   const [user] = useAuth()
-  const [_, createNewScene] = useScenes()
+  const [_, createNewScene] = useScenes(user)
+  const [stories] = useStories(user)
 
   const [title, setTitle] = React.useState("");
   const [setting, setSetting] = React.useState("");
@@ -16,9 +23,18 @@ const CreateScene = () => {
   /**
    * The order will be a number. Users can update this and it should re-arrange the scenes in order, in real-time.
    */
-  const [parent, setParent] = React.useState("");
   const [characters, setCharacters] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [tags, setTags] = React.useState("")
+
+  function saveScene() {
+    createNewScene({
+      title,
+      setting,
+      characters,
+      description,
+    })
+  }
 
   return (
     <SceneFormWrapper>
@@ -45,18 +61,22 @@ const CreateScene = () => {
         <FlexContainer>
           <Column>
             <Input
-              label="Parent ID"
-              onChange={setParent}
-              value={parent}
-              placeholder="Parent story or character"
-            />
-          </Column>
-          <Column>
-            <Input
               label="Characters"
               onChange={setCharacters}
               value={characters}
               placeholder="Characters involved"
+              disabled
+            />
+          </Column>
+        </FlexContainer>
+        <FlexContainer>
+          <Column>
+            <Input
+              label="Tags"
+              onChange={setTags}
+              value={tags}
+              placeholder="Comma-separated list of tags"
+              disabled
             />
           </Column>
         </FlexContainer>
@@ -72,7 +92,7 @@ const CreateScene = () => {
       </div>
       <FlexContainer>
         <RightAlign>
-          <Button>Submit</Button>
+          <Button onClick={saveScene}>Submit</Button>
         </RightAlign>
       </FlexContainer>
     </SceneFormWrapper>

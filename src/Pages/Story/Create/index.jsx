@@ -6,7 +6,7 @@ import { useAuth, useStories } from '../../../custom-hooks'
 
 const CreateStory = () => {
     const [user] = useAuth()
-    const [_, saveNewStory] = useStories(user, 0)
+    const [_, saveNewStory] = useStories(user)
     const [name, setName] = React.useState()
     
 

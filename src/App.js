@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Router, Link } from "@reach/router"
 
 import { SignIn } from './components'
-import { Story, Stories, Home } from './Pages'
+import { Story, Stories, Home, Scene } from './Pages'
 import { auth } from './firebase.setup'
 
 const GlobalStyle = createGlobalStyle`
@@ -41,6 +41,8 @@ function App() {
             <Story path="/story" />
             <Story path="/story/:id" />
             <Stories path="/stories" />
+            <Scene path="/scene" />
+            <Scene path="/scene/:id" />
             <Home path="/" />
           </Router>
         )}

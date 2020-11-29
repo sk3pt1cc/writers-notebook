@@ -1,8 +1,8 @@
 import firebase from 'firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import * as uuid from 'uuid'
 import { firestore } from '../../firebase.setup'
 import { firebaseQuery } from '../../utils'
+import { storyService } from '../../service'
 
 const useStories = (user, limit=null, filterTerm=null) => {
     const storiesRef = firestore.collection('stories')
@@ -10,17 +10,8 @@ const useStories = (user, limit=null, filterTerm=null) => {
 
     const [stories] = useCollectionData(query)
 
-    const saveNewStory = async (story) => {
-        const id = uuid.v4()
-
-        await storiesRef.add({
-            ...story,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            owner: user.uid,
-            id
-        })
-
-        return id
+    const saveNewStory = (story) => {
+        return storyService.save(story, user)
     }
 
     if (!stories) {

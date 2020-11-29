@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputWrapper } from './styles'
 
-const Input = ({ value, onChange, placeholder, label, textarea=false }) => (
+const Input = ({ value, onChange, placeholder, label, disabled, textarea=false }) => (
   <InputWrapper>
     <label>
       <p>{label}</p>
@@ -11,6 +11,7 @@ const Input = ({ value, onChange, placeholder, label, textarea=false }) => (
           placeholder={placeholder}
           onChange={e => onChange(e.target.value)}
           className="input"
+          disabled={disabled}
         />
       ) : (
         <textarea
@@ -19,6 +20,7 @@ const Input = ({ value, onChange, placeholder, label, textarea=false }) => (
           onChange={e => onChange(e.target.value)}
           className="input"
           rows={8}
+          disabled={disabled}
         />
       )}
     </label>  
