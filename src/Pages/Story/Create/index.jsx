@@ -1,16 +1,18 @@
 import React from 'react'
+import { navigate } from '@reach/router'
 import { Button, Input } from '../../../components/reusable'
 import { useAuth, useStories } from '../../../custom-hooks'
 
 
 const CreateStory = () => {
     const [user] = useAuth()
-    const [_, saveNewStory] = useStories(user)
+    const [_, saveNewStory] = useStories(user, 0)
     const [name, setName] = React.useState()
     
 
-    const saveStory = () => {
-        saveNewStory({ name })
+    const saveStory = async () => {
+        const id = await saveNewStory({ name })
+        navigate(`/story/${id}`)
     }
 
     return (

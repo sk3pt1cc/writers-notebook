@@ -1,9 +1,15 @@
-import React from "react";
-import { Column, FlexContainer, RightAlign } from "../../layout";
-import { Input, Button } from "../../reusable";
-import { SceneFormWrapper } from "./styles";
+import React from 'react'
+import { useAuth, useScenes } from '../../../custom-hooks'
+import {
+  FlexContainer,
+  Column
+} from '../../../components/layout'
+import { SceneFormWrapper } from './styles'
 
-const SceneForm = ({ values }) => {
+const CreateScene = () => {
+  const [user] = useAuth()
+  const [_, createNewScene] = useScenes()
+
   const [title, setTitle] = React.useState("");
   const [setting, setSetting] = React.useState("");
 
@@ -71,6 +77,6 @@ const SceneForm = ({ values }) => {
       </FlexContainer>
     </SceneFormWrapper>
   );
-};
+}
 
-export default SceneForm;
+export default CreateScene

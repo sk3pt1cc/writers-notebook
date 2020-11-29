@@ -1,0 +1,1 @@
+export { default as firebaseQuery } from './firebase-query'

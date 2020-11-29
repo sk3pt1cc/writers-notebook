@@ -1,4 +1,5 @@
 import React from 'react'
+import { Loading } from '../../../components/reusable'
 import { useAuth, useSingleStory } from '../../../custom-hooks'
 
 const ViewStory = ({ id }) => {
@@ -8,7 +9,9 @@ const ViewStory = ({ id }) => {
     console.log(story)
 
     return (
-        <p>{story && story.name}</p>
+        <Loading data={story}>
+            <p>{story && story.name}</p>
+        </Loading>
     )
 }
 
