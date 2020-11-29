@@ -1,7 +1,6 @@
 import * as uuid from 'uuid'
 import firebase from 'firebase'
 import { firestore } from '../../firebase.setup'
-import { storyService } from '..'
 
 const edit = async () => {
 

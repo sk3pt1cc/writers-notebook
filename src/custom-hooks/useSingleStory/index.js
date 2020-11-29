@@ -1,9 +1,8 @@
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase.setup'
-import firebase from 'firebase'
 
 const useSingleStory = (user, id) => {
-    const storyRef = firestore.collection(`stories`)
+    const storyRef = firestore.collection('stories')
     const query = storyRef.where('owner', '==', user.uid).where('id', '==', id)
 
     const [story] = useCollectionData(query, { idField: 'firebaseId' })

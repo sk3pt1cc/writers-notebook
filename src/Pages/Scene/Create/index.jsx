@@ -8,14 +8,13 @@ import {
 import {
   Input,
   Button,
-  MultiselectDropdown
 } from '../../../components/reusable'
 import { SceneFormWrapper } from './styles'
+import { navigate } from '@reach/router'
 
 const CreateScene = () => {
   const [user] = useAuth()
   const [_, createNewScene] = useScenes(user)
-  const [stories] = useStories(user)
 
   const [title, setTitle] = React.useState("");
   const [setting, setSetting] = React.useState("");
@@ -27,13 +26,15 @@ const CreateScene = () => {
   const [description, setDescription] = React.useState("");
   const [tags, setTags] = React.useState("")
 
-  function saveScene() {
-    createNewScene({
+  async function saveScene() {
+    const id = await createNewScene({
       title,
       setting,
       characters,
       description,
     })
+
+    navigate(`/scene/${id}`)
   }
 
   return (

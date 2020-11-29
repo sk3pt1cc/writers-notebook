@@ -22,7 +22,7 @@ const ViewStory = ({ id }) => {
 
             setStoryScenes(filteredStoryScenes)
         }
-    }, [scenes])
+    }, [story, scenes])
  
     const persistScenesToStory = () => {
         if (storyScenes !== originalScenes) {

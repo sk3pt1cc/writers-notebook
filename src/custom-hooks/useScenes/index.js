@@ -10,8 +10,8 @@ const useScenes = (user, limit=null, filterTerm=null) => {
 
   const [scenes] = useCollectionData(query, { idField: 'firebaseId' })
 
-  const saveNewScene = async (scene) => {
-    sceneService.save(scene, user)
+  const saveNewScene = (scene) => {
+    return sceneService.save(scene, user)
   }
 
   if (!scenes) {
