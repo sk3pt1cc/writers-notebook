@@ -26,6 +26,8 @@ const useSingleStory = (user, id) => {
           {...storyToEdit, scenes: [...storyToEdit.scenes, ...newScenes.map(newScene => newScene.id)]}
         )
 
+        // CURRENTLY THE PARENT IS NOT REMOVED FROM THE SCENES THAT GET DELETED SO FIX THIS
+
         newScenes.forEach(scene => {
             batch.set(
                 firestore.collection('scenes').doc(scene.firebaseId),
