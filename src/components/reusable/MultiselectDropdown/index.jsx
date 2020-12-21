@@ -5,8 +5,6 @@ import makeAnimated from 'react-select/animated';
 const MultiselectDropdown = ({ options, onSelect, label, selected }) => {
     const animatedComponents = makeAnimated()
 
-    console.log('selected', selected)
-
     return (
         <label>
             <b>{label}</b>

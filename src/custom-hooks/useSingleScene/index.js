@@ -8,9 +8,7 @@ const useSingleScene = (user, id) => {
   const [scene] = useCollectionData(query, { idField: 'firebaseId' })
 
   const editScene = (newScene) => {
-
-    console.log('newScene', newScene)
-
+    console.log(newScene)
     sceneRef.doc(newScene.firebaseId).set(newScene)
   }
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import * as uuid from 'uuid'
-import { Column, FlexContainer } from '../../../components/layout'
-import { Button, Input, Loading, EditableField, Note } from '../../../components/reusable'
+import { Button, Loading, Note } from '../../../components/reusable'
 import { useAuth, useSingleScene } from '../../../custom-hooks'
+import SceneDetails from '../Components/SceneDetails'
 
 const ViewScene = ({ id }) => {
   const [user] = useAuth()
@@ -10,6 +10,7 @@ const ViewScene = ({ id }) => {
   const [notes, setNotes] = useState([])
   const [newNoteText, setNewNoteText] = useState('')
   const [isAddingNote, setIsAddingNote] = useState(false)
+  const [editMode, setEditMode] = useState(false)
 
   React.useEffect(() => {
     if (scene && scene.notes) {
@@ -27,51 +28,22 @@ const ViewScene = ({ id }) => {
     editScene({ ...scene, notes: [...newNotes] })
   }
 
-  function persistFieldChanges(key, value) {
-    const changedScene = {...scene, [key]: value}
-    editScene(changedScene)
+  const saveDetailsChanges = (newDetails) => {
+    editScene({ ...scene, ...newDetails })
+    setEditMode(false)
   }
 
   return (
     <Loading data={scene}>
-      {scene && (
-        <>
-          <h2>{scene.title}</h2>
-          <hr />
-          <FlexContainer>
-            <Column>
-              <h3>Setting</h3>
-              <EditableField
-                currentText={scene.setting}
-                onEdit={persistFieldChanges}
-                fieldKey="setting"
-              />
-            </Column>
-          </FlexContainer>
-          <h3>Description</h3>
-          <EditableField
-            currentText={scene.description}
-            onEdit={persistFieldChanges}
-            fieldKey="description"
-          />
-          <hr />
-          <h3>Notes</h3>
-          <Button onClick={() => setIsAddingNote(!isAddingNote)}>Add Note</Button>
-          {isAddingNote && (
-            <div>
-              <Input
-                label="New Note Text"
-                onChange={setNewNoteText}
-                value={newNoteText}
-                textarea
-                placeholder="Add new note text"
-              />
-              <Button onClick={addNote}>Save</Button>
-            </div>
-          )}
-          {notes.map(note => <Note key={note.id} {...note} onClick={deleteNote} />)}
-        </>
-      )}
+      <h2>View Scene</h2>
+      <SceneDetails
+        scene={scene}
+        editMode={editMode}
+        save={saveDetailsChanges}
+      />
+      <Button onClick={() => setEditMode(!editMode)}>Edit Scene</Button>
+      {/** Do this later */}
+      <h2>Notes</h2>
     </Loading>
   )
 }

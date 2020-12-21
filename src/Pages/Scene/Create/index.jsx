@@ -1,101 +1,31 @@
 import React from 'react'
-import { useAuth, useScenes, useStories } from '../../../custom-hooks'
-import {
-  FlexContainer,
-  Column,
-  RightAlign
-} from '../../../components/layout'
-import {
-  Input,
-  Button,
-} from '../../../components/reusable'
+import { useAuth, useScenes } from '../../../custom-hooks'
 import { SceneFormWrapper } from './styles'
 import { navigate } from '@reach/router'
+import SceneDetails from '../Components/SceneDetails'
+import { Input } from '../../../components/reusable'
 
 const CreateScene = () => {
   const [user] = useAuth()
   const [_, createNewScene] = useScenes(user)
 
-  const [title, setTitle] = React.useState("");
-  const [setting, setSetting] = React.useState("");
-
-  /**
-   * The order will be a number. Users can update this and it should re-arrange the scenes in order, in real-time.
-   */
-  const [characters, setCharacters] = React.useState("");
-  const [description, setDescription] = React.useState("");
+  // This is simply for finding the scene with a search.
   const [tags, setTags] = React.useState("")
 
-  async function saveScene() {
-    const id = await createNewScene({
-      title,
-      setting,
-      characters,
-      description,
-    })
-
+  async function saveScene(scene) {
+    const id = await createNewScene(scene)
     navigate(`/scene/${id}`)
   }
+
+  // Add a link to this article https://ashlyhilst.com/blog/2018/10/10/how-to-use-the-story-genius-scene-card
 
   return (
     <SceneFormWrapper>
       <h2>Create a Scene</h2>
-      <div>
-        <FlexContainer>
-          <Column>
-            <Input
-              label="Title"
-              onChange={setTitle}
-              value={title}
-              placeholder="Title of scene"
-            />
-          </Column>
-          <Column>
-            <Input
-              label="Setting"
-              onChange={setSetting}
-              value={setting}
-              placeholder="Where this takes place"
-            />
-          </Column>
-        </FlexContainer>
-        <FlexContainer>
-          <Column>
-            <Input
-              label="Characters"
-              onChange={setCharacters}
-              value={characters}
-              placeholder="Characters involved"
-              disabled
-            />
-          </Column>
-        </FlexContainer>
-        <FlexContainer>
-          <Column>
-            <Input
-              label="Tags"
-              onChange={setTags}
-              value={tags}
-              placeholder="Comma-separated list of tags"
-              disabled
-            />
-          </Column>
-        </FlexContainer>
-        <FlexContainer>
-          <Input
-            label="Description"
-            onChange={setDescription}
-            value={description}
-            textarea
-            placeholder="What happens?"
-          />
-        </FlexContainer>
-      </div>
-      <FlexContainer>
-        <RightAlign>
-          <Button onClick={saveScene}>Submit</Button>
-        </RightAlign>
-      </FlexContainer>
+      <SceneDetails
+        save={saveScene}
+        editMode
+      />
     </SceneFormWrapper>
   );
 }

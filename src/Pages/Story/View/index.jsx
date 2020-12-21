@@ -5,7 +5,7 @@ import scene from '../../../service/scene'
 
 const ViewStory = ({ id }) => {
     const [user] = useAuth()
-    const [story, _, persistScenes] = useSingleStory(user, id)
+    const [story, _] = useSingleStory(user, id)
     const [scenes] = useScenes(user)
     const [storyScenes, setStoryScenes] = useState([])
 
@@ -25,14 +25,7 @@ const ViewStory = ({ id }) => {
     }, [story, scenes])
  
     const persistScenesToStory = () => {
-        if (storyScenes !== originalScenes) {
-            const scenesToAdd = storyScenes.map(
-                aScene => scenes.find(
-                    foundScene => foundScene.id === aScene.value
-                )
-            )
-            persistScenes(scenesToAdd)
-        }
+        
     }
 
     const getSceneData = () => {

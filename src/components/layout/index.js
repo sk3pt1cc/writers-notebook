@@ -1,3 +1,6 @@
 export { default as FlexContainer } from './FlexContainer'
 export { default as Column } from './Column'
 export { default as RightAlign } from './RightAlign'
+export { default as Table } from './Table'
+export { default as TableRow } from './Table/TableRow'
+export { default as TableCell } from './Table/TableCell'
