@@ -1,17 +1,18 @@
-import firebase from 'firebase'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase.setup'
 import { firebaseQuery } from '../../utils'
-import { storyService } from '../../service'
+import { databaseService } from '../../service'
 
 const useStories = (user, limit=null, filterTerm=null) => {
-    const storiesRef = firestore.collection('stories')
+    const storyCollection = databaseService.collections.STORIES;
+
+    const storiesRef = firestore.collection(storyCollection)
     const query = firebaseQuery(storiesRef, user, limit, filterTerm)
 
     const [stories] = useCollectionData(query)
 
     const saveNewStory = (story) => {
-        return storyService.save(story, user)
+        return databaseService.save(story, storyCollection, user)
     }
 
     if (!stories) {

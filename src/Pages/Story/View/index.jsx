@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Loading, MultiselectDropdown } from '../../../components/reusable'
 import { useAuth, useScenes, useSingleStory } from '../../../custom-hooks'
-import scene from '../../../service/scene'
 
 const ViewStory = ({ id }) => {
     const [user] = useAuth()

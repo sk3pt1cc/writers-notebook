@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const CreateSceneWrapper = styled.div`
+export const CreateCharacterWrapper = styled.div`
   padding: 16px;
 `

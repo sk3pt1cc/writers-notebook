@@ -1,9 +1,8 @@
 import React from 'react'
 import { useAuth, useScenes } from '../../../custom-hooks'
-import { SceneFormWrapper } from './styles'
+import { CreateSceneWrapper } from './styles'
 import { navigate } from '@reach/router'
 import SceneDetails from '../Components/SceneDetails'
-import { Input } from '../../../components/reusable'
 
 const CreateScene = () => {
   const [user] = useAuth()
@@ -12,7 +11,7 @@ const CreateScene = () => {
   // This is simply for finding the scene with a search.
   const [tags, setTags] = React.useState("")
 
-  async function saveScene(scene) {
+  const saveScene = async (scene) => {
     const id = await createNewScene(scene)
     navigate(`/scene/${id}`)
   }
@@ -20,13 +19,13 @@ const CreateScene = () => {
   // Add a link to this article https://ashlyhilst.com/blog/2018/10/10/how-to-use-the-story-genius-scene-card
 
   return (
-    <SceneFormWrapper>
+    <CreateSceneWrapper>
       <h2>Create a Scene</h2>
       <SceneDetails
         save={saveScene}
         editMode
       />
-    </SceneFormWrapper>
+    </CreateSceneWrapper>
   );
 }
 

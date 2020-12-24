@@ -12,6 +12,9 @@ const Home = () => (
     <div>
       <Link to="scene">Create Scene</Link>
     </div>
+    <div>
+      <Link to="character">Create Character</Link>
+    </div>
   </>
 )
 

@@ -1,14 +1,17 @@
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { firestore } from "../../firebase.setup"
+import { databaseService } from "../../service"
+import { firebaseQuery } from "../../utils"
 
 const useSingleScene = (user, id) => {
-  const sceneRef = firestore.collection('scenes')
-  const query = sceneRef.where('owner', '==', user.uid).where('id', '==', id)
+  const sceneCollection = databaseService.collections.SCENES
+
+  const sceneRef = firestore.collection(sceneCollection)
+  const query = firebaseQuery(sceneRef, user, 1, [['id', id]])
 
   const [scene] = useCollectionData(query, { idField: 'firebaseId' })
 
   const editScene = (newScene) => {
-    console.log(newScene)
     sceneRef.doc(newScene.firebaseId).set(newScene)
   }
 

@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as uuid from 'uuid'
-import { Button, Loading, Note } from '../../../components/reusable'
+import { Button, Loading } from '../../../components/reusable'
 import { useAuth, useSingleScene } from '../../../custom-hooks'
 import SceneDetails from '../Components/SceneDetails'
 
 const ViewScene = ({ id }) => {
   const [user] = useAuth()
   const [scene, editScene] = useSingleScene(user, id)
-  const [notes, setNotes] = useState([])
-  const [newNoteText, setNewNoteText] = useState('')
-  const [isAddingNote, setIsAddingNote] = useState(false)
-  const [editMode, setEditMode] = useState(false)
+  const [notes, setNotes] = React.useState([])
+  const [newNoteText, setNewNoteText] = React.useState('')
+  const [isAddingNote, setIsAddingNote] = React.useState(false)
+  const [editMode, setEditMode] = React.useState(false)
 
   React.useEffect(() => {
     if (scene && scene.notes) {
