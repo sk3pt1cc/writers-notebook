@@ -13,7 +13,6 @@ import { Input, Button } from "../../../../components/reusable";
 const SceneDetails = (props) => {
   const { editMode, scene, save } = props;
 
-  const [sceneNumber, setSceneNumber] = React.useState("");
   const [sceneTextLink, setSceneTextLink] = React.useState("");
   const [alphaPoint, setAlphaPoint] = React.useState("");
   const [subplots, setSubplots] = React.useState([]);
@@ -26,7 +25,6 @@ const SceneDetails = (props) => {
 
   React.useEffect(() => {
     if (scene) {
-      setSceneNumber(scene.sceneNumber);
       setAlphaPoint(scene.alphaPoint);
       setSubplots(scene.subplots);
       setWhatHappens(scene.whatHappens);
@@ -43,7 +41,6 @@ const SceneDetails = (props) => {
     const splitTags = tags.split(",");
 
     save({
-      sceneNumber,
       alphaPoint,
       subplots,
       whatHappens,
@@ -57,17 +54,6 @@ const SceneDetails = (props) => {
 
   return (
     <SceneDetailsWrapper>
-      <FlexContainer>
-        <Column>
-          <Input
-            label="Scene #"
-            onChange={setSceneNumber}
-            value={sceneNumber}
-            placeholder="Enter the scene number"
-            uneditable={!editMode}
-          />
-        </Column>
-      </FlexContainer>
       <FlexContainer>
         <Column>
           <Input
