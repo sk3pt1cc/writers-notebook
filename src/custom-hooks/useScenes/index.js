@@ -8,7 +8,7 @@ const useScenes = (user, limit=null, filterTerm=null) => {
   const scenesCollection = databaseService.collections.SCENES
 
   const scenesRef = firestore.collection(scenesCollection)
-  const query = firebaseQuery(scenesRef, user, limit, filterTerm)
+  const query = firebaseQuery(scenesRef, user, limit, [])
 
   const [scenes] = useCollectionData(query, { idField: 'firebaseId' })
 

@@ -1,4 +1,4 @@
-const firebaseQuery = (ref, user, limit, filters) => {
+const firebaseQuery = (ref, user, limit, filters = []) => {
   let query
 
   query = ref.where('owner', '==', user.uid)

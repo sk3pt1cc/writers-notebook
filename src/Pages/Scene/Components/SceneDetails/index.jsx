@@ -1,5 +1,5 @@
-import React from 'react'
-import { SceneDetailsWrapper } from './styles'
+import React from "react";
+import { SceneDetailsWrapper } from "./styles";
 import {
   FlexContainer,
   Column,
@@ -7,47 +7,40 @@ import {
   Table,
   TableRow,
   TableCell,
-} from '../../../../components/layout'
-import {
-  Input,
-  Button,
-} from '../../../../components/reusable'
+} from "../../../../components/layout";
+import { Input, Button } from "../../../../components/reusable";
 
 const SceneDetails = (props) => {
-  const {
-    editMode,
-    scene,
-    save
-  } = props
-  
-  const [sceneNumber, setSceneNumber] = React.useState("")
-  const [sceneTextLink, setSceneTextLink] = React.useState("")
-  const [alphaPoint, setAlphaPoint] = React.useState("")
-  const [subplots, setSubplots] = React.useState([])
-  const [whatHappens, setWhatHappens] = React.useState("")
-  const [consequences, setConsequences] = React.useState("")
-  const [whyItMatters, setWhyItMatters] = React.useState("")
-  const [theRealization, setTheRealization] = React.useState("")
-  const [andSo, setAndSo] = React.useState("")
-  const [tags, setTags] = React.useState([])
+  const { editMode, scene, save } = props;
+
+  const [sceneNumber, setSceneNumber] = React.useState("");
+  const [sceneTextLink, setSceneTextLink] = React.useState("");
+  const [alphaPoint, setAlphaPoint] = React.useState("");
+  const [subplots, setSubplots] = React.useState([]);
+  const [whatHappens, setWhatHappens] = React.useState("");
+  const [consequences, setConsequences] = React.useState("");
+  const [whyItMatters, setWhyItMatters] = React.useState("");
+  const [theRealization, setTheRealization] = React.useState("");
+  const [andSo, setAndSo] = React.useState("");
+  const [tags, setTags] = React.useState([]);
 
   React.useEffect(() => {
     if (scene) {
-      setSceneNumber(scene.sceneNumber)
-      setAlphaPoint(scene.alphaPoint)
-      setSubplots(scene.subplots)
-      setWhatHappens(scene.whatHappens)
-      setConsequences(scene.consequences)
-      setWhyItMatters(scene.whyItMatters)
-      setTheRealization(scene.theRealization)
-      setAndSo(scene.andSo)
-      setTags(scene.tags.join(','))
-      setSceneTextLink(scene.sceneTextLink)
+      setSceneNumber(scene.sceneNumber);
+      setAlphaPoint(scene.alphaPoint);
+      setSubplots(scene.subplots);
+      setWhatHappens(scene.whatHappens);
+      setConsequences(scene.consequences);
+      setWhyItMatters(scene.whyItMatters);
+      setTheRealization(scene.theRealization);
+      setAndSo(scene.andSo);
+      setTags(scene.tags.join(","));
+      setSceneTextLink(scene.sceneTextLink);
     }
-  }, [scene])
+  }, [scene]);
 
   const saveDetails = () => {
-    const splitTags = tags.split(',')
+    const splitTags = tags.split(",");
 
     save({
       sceneNumber,
@@ -58,9 +51,9 @@ const SceneDetails = (props) => {
       whyItMatters,
       theRealization,
       tags: splitTags,
-      sceneTextLink
-    })
-  }
+      sceneTextLink,
+    });
+  };
 
   return (
     <SceneDetailsWrapper>
@@ -113,19 +106,21 @@ const SceneDetails = (props) => {
         <Table>
           <TableRow>
             <TableCell size="1">
-              <a href="https://ashlyhilst.com/blog/2018/10/10/how-to-use-the-story-genius-scene-card">How to use this</a>
+              <a href="https://ashlyhilst.com/blog/2018/10/10/how-to-use-the-story-genius-scene-card">
+                How to use this
+              </a>
             </TableCell>
             <TableCell size="2" heading>
               Cause
-              </TableCell>
-            <TableCell size="2" heading >
+            </TableCell>
+            <TableCell size="2" heading>
               Effect
-              </TableCell>
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell size="1" heading>
               The plot
-              </TableCell>
+            </TableCell>
             <TableCell size="2">
               <Input
                 label="What happens"
@@ -150,7 +145,7 @@ const SceneDetails = (props) => {
           <TableRow>
             <TableCell size="1" heading>
               Third Rail
-              </TableCell>
+            </TableCell>
             <TableCell size="2">
               <Input
                 label="Why it matters"
@@ -188,14 +183,18 @@ const SceneDetails = (props) => {
           </TableRow>
         </Table>
       </FlexContainer>
-      <br />
-      <FlexContainer>
-        <RightAlign>
-          <Button onClick={saveDetails}>Submit</Button>
-        </RightAlign>
-      </FlexContainer>
+      {editMode && (
+        <>
+          <br />
+          <FlexContainer>
+            <RightAlign>
+              <Button onClick={saveDetails}>Submit</Button>
+            </RightAlign>
+          </FlexContainer>
+        </>
+      )}
     </SceneDetailsWrapper>
-  )
-}
+  );
+};
 
-export default SceneDetails
+export default SceneDetails;

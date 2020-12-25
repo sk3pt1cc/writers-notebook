@@ -7,7 +7,7 @@ const useCharacters = (user, limit=null, filterTerm=null) => {
     const charactersCollection = databaseService.collections.CHARACTERS
 
     const charactersRef = firestore.collection(charactersCollection)
-    const query = firebaseQuery(charactersRef, user, limit, filterTerm)
+    const query = firebaseQuery(charactersRef, user, limit, [])
 
     const [characters] = useCollectionData(query)
 

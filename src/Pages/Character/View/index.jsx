@@ -1,13 +1,12 @@
 import React from 'react'
-import { Button, Loading } from '../../../components/reusable'
-import { useAuth, useSingleCharacter } from '../../../custom-hooks'
+import { Button, Loading, SelectionCarousel } from '../../../components/reusable'
+import { useAuth, useScenes, useSingleCharacter } from '../../../custom-hooks'
 import { CharacterDetails } from '../components'
 
 const ViewCharacter = ({ id }) => {
     const [user] = useAuth()
     const [character, editCharacter] = useSingleCharacter(user, id)
-
-    const [notes, setNotes] = React.useState()
+    const [scenes] = useScenes(user)
     const [editMode, setEditMode] = React.useState(false)
 
     const saveDetailsChanges = (newDetails) => {
@@ -15,9 +14,11 @@ const ViewCharacter = ({ id }) => {
         setEditMode(false)
     }
 
-    console.log('hewoinabiufsi')
+    const saveScenes = (scenes) => {
+        editCharacter({ ...character, scenes })
+    }
 
-    console.log(character)
+    console.log('charararacter', character);
 
     return (
         <Loading data={character}>
@@ -27,7 +28,9 @@ const ViewCharacter = ({ id }) => {
                 editMode={editMode}
                 save={saveDetailsChanges}
             />
-            <Button onClick={() => setEditMode(!editMode)}>Edit Character</Button>
+            <Button onClick={() => setEditMode(!editMode)}>Edit Character Details</Button>
+            <hr />
+            <SelectionCarousel entities={scenes} saveSelection={saveScenes} titleKey="alphaPoint" />
         </Loading>
     )
 }
